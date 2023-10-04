@@ -1,0 +1,11 @@
+const Koa = require("koa");
+const koaRouter = require("@koa/router");
+const koaBodyParse = require("koa-bodyparser");
+const koaMulter = require("@koa/multer");
+const register = require("../router");
+const cros = require("koa2-cors");
+const app = new Koa();
+app.use(cros());
+app.use(koaBodyParse());
+register(app);
+module.exports = app;

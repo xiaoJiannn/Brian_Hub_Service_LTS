@@ -16,6 +16,11 @@ class userService {
     const [value] = await connection.execute(statment, [id]);
     return value;
   }
+  async updateUserProfile(name, pwd, id) {
+    const statment = "UPDATE users SET name=?,password=? WHERE id=? ;";
+    const [value] = await connection.execute(statment, [name, pwd, id]);
+    return value;
+  }
 }
 
 module.exports = new userService();

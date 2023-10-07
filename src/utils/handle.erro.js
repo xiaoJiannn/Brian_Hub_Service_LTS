@@ -5,6 +5,7 @@ const {
   TOKEN_UNDEFINED,
   TOKEN_EXPIRED,
   MOMENT_EMPTY,
+  ACTION_INVALID,
 } = require("../config/error.config");
 app.on("error", (errorMsg, ctx) => {
   let message;
@@ -30,6 +31,9 @@ app.on("error", (errorMsg, ctx) => {
       code = -1005;
       message = "内容不能为空";
       break;
+    case ACTION_INVALID:
+      code = -1006;
+      message = "用户非法操作";
   }
   ctx.body = {
     code,

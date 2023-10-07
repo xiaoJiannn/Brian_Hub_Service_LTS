@@ -4,9 +4,13 @@ const {
   showUser,
   updateUserAvatar,
   getUserProfile,
+  updateUserProfile,
 } = require("../service/user.service");
+
 const { uploadPathForAvatar } = require("../config/path.config");
 const { HOST, PORT } = require("../config/server.config");
+const { encryptPwd } = require("../utils/encrypt");
+const { log } = require("console");
 class userController {
   async getUserData(ctx, next) {
     const result = await showUser();
@@ -58,6 +62,19 @@ class userController {
       const result = await getUserProfile(id);
       ctx.body = { message: "请求成功", data: result };
       await next();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async updateUserProfile(ctx, next) {
+    try {
+      const { pwd, name } = ctx.request.body;
+      const { id } = ctx.params;
+      const md5 = encryptPwd(pwd);
+      console.log(pwd);
+      const result = await updateUserProfile(name, md5, id);
+      ctx.body = { message: "请求成功" };
     } catch (error) {
       console.log(error);
     }

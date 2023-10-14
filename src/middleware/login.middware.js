@@ -11,9 +11,7 @@ const verifyLogin = async (ctx, next) => {
   try {
     const { names, pwd } = ctx.request.body;
     const result = encryptPwd(pwd);
-    console.log(result);
     const value = await queryUerByNames(names);
-    console.log(value);
     if (value[0].password !== result) {
       return ctx.app.emit("error", PASSWORD_OR_USERNAMES_ERROR, ctx);
     }

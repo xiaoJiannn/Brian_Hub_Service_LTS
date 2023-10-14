@@ -19,7 +19,8 @@ class momentService {
       m.content,
       m.title,
       m.user_id,
-      m.createAt
+      m.createAt,
+      m.id
       FROM moments m
           LEFT JOIN users u ON m.user_id = u.id
       LIMIT ?

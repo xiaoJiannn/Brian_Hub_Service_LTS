@@ -4,7 +4,6 @@ class commentController {
     try {
       const { content, momentId } = ctx.request.body;
       const { id } = ctx.params;
-      console.log(content, momentId, id);
       const result = await create(content, id, momentId);
       ctx.body = { message: "请求成功", data: result };
     } catch (error) {

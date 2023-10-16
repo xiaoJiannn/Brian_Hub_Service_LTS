@@ -11,7 +11,7 @@ class momentService {
     }
   }
 
-  async showMoment(offset = 0, size = 100) {
+  async showMoment(offset, size) {
     try {
       const statment = `SELECT
       u.name,

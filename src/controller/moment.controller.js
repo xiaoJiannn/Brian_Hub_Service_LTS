@@ -8,7 +8,6 @@ class momentController {
   async createMoment(ctx, next) {
     try {
       const { title, content, id } = ctx.request.body;
-      // console.log(title, content, id);
       const result = await createMoment(title, content, id);
       ctx.body = {
         message: "发布成功",
@@ -18,10 +17,13 @@ class momentController {
       console.log(error);
     }
   }
-  async recommentMoment(ctx, next) {
-    const result = await showMoment();
+  async recommendMoment(ctx, next) {
+    const { offset, size } = ctx.request.query;
+    const result = await showMoment(offset, size);
+    console.log(offset, size);
     ctx.body = {
       message: "请求成功",
+      isAll: size > result.length,
       data: result,
     };
   }

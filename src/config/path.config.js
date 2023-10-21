@@ -1,2 +1,3 @@
 const uploadPathForAvatar = "./uploads/avatar";
-module.exports = { uploadPathForAvatar };
+const uploadPathForMoment = "./uploads/moments";
+module.exports = { uploadPathForAvatar, uploadPathForMoment };

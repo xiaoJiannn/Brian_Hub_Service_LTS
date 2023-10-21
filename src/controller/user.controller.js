@@ -57,7 +57,6 @@ class userController {
   }
   async getUserProfile(ctx, next) {
     try {
-      // const { id } = ctx.userInfo;
       const { id } = ctx.params;
       const result = await getUserProfile(id);
       ctx.body = { message: "请求成功", data: result };
@@ -72,7 +71,6 @@ class userController {
       const { pwd, name } = ctx.request.body;
       const { id } = ctx.params;
       const md5 = encryptPwd(pwd);
-      console.log(pwd);
       const result = await updateUserProfile(name, md5, id);
       ctx.body = { message: "请求成功" };
     } catch (error) {

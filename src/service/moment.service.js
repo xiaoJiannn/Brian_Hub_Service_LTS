@@ -100,6 +100,15 @@ class momentService {
       console.log(error);
     }
   }
+  async updateMomentImgs(id, files) {
+    try {
+      const statment = " UPDATE moments SET imgs=? WHERE id=? ;";
+      const [value] = await connection.execute(statment, [files, id]);
+      return value;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = new momentService();

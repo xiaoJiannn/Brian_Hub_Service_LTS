@@ -15,6 +15,7 @@ const { encryptedPwd } = require("../middleware/register.middleware");
 
 const userRouter = new koaRouter({ prefix: "/user" });
 userRouter.get("/", getUserData);
+
 userRouter.get("/avatar/:id", getUserAvatar);
 
 userRouter.post("/update", verifyToken, updateUserInfo);

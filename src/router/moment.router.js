@@ -5,6 +5,7 @@ const {
   recommendMoment,
   momentDetail,
   userMoment,
+  getMomentImgs,
 } = require("../controller/moment.controller");
 const { verifyMoment } = require("../middleware/moment.middleware");
 const { verifyToken } = require("../middleware/login.middware");
@@ -13,4 +14,5 @@ momentRouter.get("/recommend", recommendMoment);
 momentRouter.get("/userMoment", verifyToken, userMoment);
 momentRouter.post("/publish", verifyToken, verifyMoment, createMoment);
 momentRouter.get("/detail/:id", momentDetail);
+momentRouter.get("/imgs/:id", getMomentImgs);
 module.exports = momentRouter;

@@ -3,7 +3,15 @@ const {
   createMoment,
   queryMomentById,
   showUserMoment,
+  updateMomentImgs,
 } = require("../service/moment.service");
+const {
+  queryMomentImgsById,
+  queryImgsById,
+} = require("../service/files.service");
+const { uploadPathForMoment } = require("../config/path.config");
+const { HOST, PORT } = require("../config/server.config");
+const fs = require("fs");
 class momentController {
   async createMoment(ctx, next) {
     try {
@@ -42,6 +50,28 @@ class momentController {
       message: "请求成功",
       data: result,
     };
+  }
+  async updateMomentImgs(ctx, next) {
+    const id = ctx.params.id;
+    const result = await queryMomentImgsById(id);
+    let urlArray = [];
+    for (const item of result) {
+      urlArray.push(`${HOST}:${PORT}/moment/imgs/${item.id}`);
+    }
+    const updateRes = await updateMomentImgs(id, urlArray);
+    await next();
+  }
+  async getMomentImgs(ctx, next) {
+    try {
+      const id = ctx.params.id;
+      const result = await queryImgsById(id);
+      const { filename, mimetype } = result[0];
+      console.log(filename, mimetype);
+      ctx.type = mimetype;
+      ctx.body = fs.createReadStream(`${uploadPathForMoment}/${filename}`);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

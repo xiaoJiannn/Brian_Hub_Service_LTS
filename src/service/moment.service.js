@@ -23,6 +23,7 @@ class momentService {
       m.id
       FROM moments m
           LEFT JOIN users u ON m.user_id = u.id
+          LEFT JOIN photo p ON m.id = p.moment_id
       LIMIT ?
       OFFSET ?; `;
       const [value] = await connection.execute(statment, [
